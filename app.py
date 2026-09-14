@@ -22,7 +22,18 @@ hide_st_style = """
     </style>
 """
 st.markdown(hide_st_style, unsafe_allow_html=True)
-
+# Ocultar menú superior, pie de página y marca flotante de la esquina
+hide_st_style = """
+    <style>
+    #MainMenu {visibility: hidden !important;}
+    header {visibility: hidden !important;}
+    footer {visibility: hidden !important;}
+    [data-testid="stToolbar"] {visibility: hidden !important;}
+    div[class*="viewerBadge"] {display: none !important;}
+    iframe[title="streamlit_badge"] {display: none !important;}
+    </style>
+"""
+st.markdown(hide_st_style, unsafe_allow_html=True)
 # -------------------------------------------------------------
 # CONFIGURACIÓN DE SUPABASE
 # -------------------------------------------------------------

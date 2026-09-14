@@ -12,29 +12,24 @@ st.set_page_config(
 )
 
 # -------------------------------------------------------------
-# OCULTAR BARRA SUPERIOR, MENÚ Y BOTÓN DE GITHUB
+# OCULTAR BARRA SUPERIOR, MENÚ, PIE Y MARCA FLOTANTE DE STREAMLIT
 # -------------------------------------------------------------
-hide_st_style = """
-    <style>
-    #MainMenu {visibility: hidden;}
-    header {visibility: hidden;}
-    footer {visibility: hidden;}
-    </style>
-"""
-st.markdown(hide_st_style, unsafe_allow_html=True)
-# Ocultar menú superior, pie de página y marca flotante de la esquina
 hide_st_style = """
     <style>
     #MainMenu {visibility: hidden !important;}
     header {visibility: hidden !important;}
     footer {visibility: hidden !important;}
-    [data-testid="stToolbar"] {visibility: hidden !important;}
+    [data-testid="stHeader"] {display: none !important;}
+    [data-testid="stToolbar"] {display: none !important;}
+    [data-testid="stDecoration"] {display: none !important;}
+    [data-testid="stStatusWidget"] {display: none !important;}
     div[class*="viewerBadge"] {display: none !important;}
+    a[class*="viewerBadge"] {display: none !important;}
     iframe[title="streamlit_badge"] {display: none !important;}
+    #stDecoration {display: none !important;}
     </style>
 """
-st.markdown(hide_st_style, unsafe_allow_html=True)
-# -------------------------------------------------------------
+st.markdown(hide_st_style, unsafe_allow_html=True)# -------------------------------------------------------------
 # CONFIGURACIÓN DE SUPABASE
 # -------------------------------------------------------------
 DEFAULT_URL = "https://efqckksjhldyxmokmcfd.supabase.co"

@@ -3,18 +3,44 @@ from supabase import create_client
 from datetime import datetime, date
 
 # -------------------------------------------------------------
+# CONFIGURACIÓN DE PÁGINA (Debe ser la primera orden de Streamlit)
+# -------------------------------------------------------------
+st.set_page_config(
+    page_title="Salud Ocupacional & Telemedicina",
+    page_icon="🩺",
+    layout="wide"
+)
+
+# -------------------------------------------------------------
+# OCULTAR BARRA SUPERIOR, MENÚ Y BOTÓN DE GITHUB
+# -------------------------------------------------------------
+hide_st_style = """
+    <style>
+    #MainMenu {visibility: hidden;}
+    header {visibility: hidden;}
+    footer {visibility: hidden;}
+    </style>
+"""
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
+# -------------------------------------------------------------
 # CONFIGURACIÓN DE SUPABASE
 # -------------------------------------------------------------
-SUPABASE_URL = "https://efqckksjhldyxmokmcfd.supabase.co"
-# ⚠️ REEMPLAZA ESTA CLAVE CON TU SUPABASE ANON KEY REAL ⚠️
-SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmcWNra3NqaGxkeXhtb2ttY2ZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5MzM0NjYsImV4cCI6MjEwNDUwOTQ2Nn0._q0FRMevxqLmAiYUb9wBzDLIzyqXQblhuIhn6FCXvxU"
+DEFAULT_URL = "https://efqckksjhldyxmokmcfd.supabase.co"
+DEFAULT_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmcWNra3NqaGxkeXhtb2ttY2ZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5MzM0NjYsImV4cCI6MjEwNDUwOTQ2Nn0._q0FRMevxqLmAiYUb9wBzDLIzyqXQblhuIhn6FCXvxU"
+
+# Lee de st.secrets si está configurado en Streamlit Cloud; de lo contrario usa los datos por defecto
+try:
+    SUPABASE_URL = st.secrets.get("SUPABASE_URL", DEFAULT_URL)
+    SUPABASE_KEY = st.secrets.get("SUPABASE_KEY", DEFAULT_KEY)
+except Exception:
+    SUPABASE_URL = DEFAULT_URL
+    SUPABASE_KEY = DEFAULT_KEY
 
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # PIN de acceso exclusivo para el personal médico/administrativo
 PIN_MEDICO_CORRECTO = "medico2026"  # Puedes cambiar este PIN por el que gustes
-
-st.set_page_config(page_title="Salud Ocupacional & Telemedicina", page_icon="🩺", layout="wide")
 
 st.title("🩺 Sistema Integral de Salud Ocupacional & Telemedicina")
 st.caption("Plataforma de Atención Médica en Planta, Cobertura a Sucursales y Gestión de Citas")
